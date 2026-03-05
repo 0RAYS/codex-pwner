@@ -10,7 +10,7 @@ echo "[+] password file applied"
 
 # ---- 2. pacman 换源（运行时可选）----
 if [[ "z${GLOBAL_MIRROR:-}z" != "zz" ]]; then
-    sed -i 's/^#//' /etc/pacman.conf
+    sed -i 's/^# //' /etc/pacman.d/archlinuxcn-mirrorlist /etc/pacman.d/mirrorlist
 fi
 
 # ---- 3. pacman 换用新 keyring （安全设置） ----

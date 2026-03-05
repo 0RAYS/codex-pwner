@@ -17,10 +17,12 @@ RUN pacman -Syu --noconfirm \
     python python-pip uv openai-codex procps-ng ipython \
     afl++ bear boost-libs debuginfod gdb libc++ \
     zsh zsh-syntax-highlighting zsh-autosuggestions \
-    net-tools iproute2 openbsd-netcat \
+    net-tools iproute2 openbsd-netcat sudo \
     && pacman -Scc --noconfirm
 
-RUN cat >> /etc/pacman.conf << EOF
+RUN sed -i 's/#Color/Color/' /etc/pacman.conf && \
+    sed -i 's/^MAKEFLAGS=.*/MAKEFLAGS="-j"/' /etc/makepkg.conf && \
+    cat >> /etc/pacman.conf << EOF
 [archlinuxcn]
 Include = /etc/pacman.d/archlinuxcn-mirrorlist
 EOF
@@ -28,6 +30,10 @@ RUN pacman-key --init && \
     pacman -Sy archlinuxcn-keyring --noconfirm && \
     pacman -Syu --noconfirm yay filebrowser && \
     pacman -Scc --noconfirm
+RUN useradd -m builder && \
+    echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+COPY scripts/yay.sh /usr/local/sbin/yay
+RUN chmod +x /usr/local/sbin/yay
 
 # 3) 额外二进制工具
 ADD https://github.com/SaladDay/cc-switch-cli/releases/download/v4.7.0/cc-switch-cli-linux-x64-musl.tar.gz /tmp/ccs.tar.gz

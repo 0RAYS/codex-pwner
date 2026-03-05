@@ -14,7 +14,6 @@ docker run -d \
   -e OPENAI_API_KEY="sk-xxx" \
   -e OPENAI_BASE_URL="https://your.api.dist/v1" \
   -e PASSWORD="yourpassword" \
-  -e PACMAN_USE_MIRROR=0 \
   -v codex-data:/data \
   christarcher/0rays-codex-client:latest
 ```
