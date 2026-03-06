@@ -20,6 +20,7 @@ RUN pacman -Syu --noconfirm \
     net-tools iproute2 openbsd-netcat sudo \
     && pacman -Scc --noconfirm
 
+# 如果这里构建有问题，就给cat heredoc后面加上反斜杠
 RUN sed -i 's/#Color/Color/' /etc/pacman.conf && \
     sed -i 's/^MAKEFLAGS=.*/MAKEFLAGS="-j"/' /etc/makepkg.conf && \
     cat >> /etc/pacman.conf << EOF

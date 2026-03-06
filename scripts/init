@@ -33,7 +33,7 @@ fi
 # 如果设置了OPENAI_BASE_URL, 并且为首次启动, 则填充, 否则替换
 CODEX_CFG="/data/codex/config.toml"
 if [ -n "${OPENAI_BASE_URL:-}" ]; then
-    BASE_URL="base_url = ${OPENAI_BASE_URL}"
+    BASE_URL="base_url = \"${OPENAI_BASE_URL}\""
 else
     BASE_URL=""
 fi
