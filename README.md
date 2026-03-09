@@ -65,7 +65,7 @@ docker run -d \
 基于此镜像构建专属环境：
 
 ```dockerfile
-FROM rocketdev/0rays-codex-auditor:v1
+FROM rocketdev/0rays-codex-auditor:latest
 
 RUN pacman -Syu --noconfirm python-pwntools
 ```
