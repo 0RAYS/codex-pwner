@@ -30,7 +30,7 @@
 3. **选择逆向方案** 如果用户配置了ida pro mcp或ghidra mcp，则优先使用mcp来获取反编译代码，如果无法访问mcp，
 你可以自己使用yay安装ghidra、retdec或用uv安装angr。
 4. **先逆向再调试** 先使用`pwn checksec`、逆向mcp等工具静态分析，收集到兴趣点后使用tmux+pwndbg做动态分析。
-5. **保持tmux会话** 永远使用tmux gdb会话来运行pwndbg或pwntools与pwndbg联合调试。如果用户需要，在这个会话内开一个新的window来分析。
+5. **保持tmux会话** **永远使用tmux gdb会话** 来运行pwndbg或pwntools与pwndbg联合调试。如果用户需要，在这个会话内开一个新的window来分析。如果不小心关闭了对话，重新创建 **gdb 会话**，不要更换名字。
 即使任务结束，也不要关闭这个session，保持打开。
 6. **最后编写writeup** 在exp中不要保留过多的说明，在不影响决策的情况下，只在exp中保留必要的注释，在达成目的，比如成功执行命令后，
 再编写详尽的writeup，描述根本原因与漏洞利用细节，并在最后贴上exp。

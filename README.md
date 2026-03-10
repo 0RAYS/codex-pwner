@@ -26,7 +26,7 @@ docker run -d \
 |---|---|
 | Web 终端 (ttyd) | `http://<host>:8981` |
 | 文件浏览器 | `http://<host>:8981/files/` |
-| 监控 ttyd (只读) | `http://<host>:8981/monitor/` |
+| 监控 ttyd (给codex用的，不要随意操作，避免影响ai判断) | `http://<host>:8981/monitor/` |
 | SSH | `ssh root@<host> -p 8982` |
 
 默认密码通过 `PASSWORD` 环境变量设置，未设置时为 `0raysnb`。
