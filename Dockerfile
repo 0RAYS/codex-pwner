@@ -6,3 +6,8 @@ RUN sed -i '/^#\\[multilib\\]$/,/^$/{s/^#//}' /etc/pacman.conf && \
     paho-mqtt-c msgpack-c python-lief lib32-glibc lib32-gcc-libs json-c \
     json-glib jsoncpp ceccomp boost-libs && \
     pacman -Scc --noconfirm
+
+RUN git clone https://github.com/matrix1001/glibc-all-in-one.git /root/glibc-all-in-one
+
+COPY configs/nginx.conf /etc/nginx/nginx.conf
+COPY configs/supervisord.conf /etc/supervisord.conf
