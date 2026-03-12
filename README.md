@@ -45,6 +45,8 @@ docker run -d \
 | `PROXY` | HTTP/HTTPS 代理地址 (可选) |
 | `GLOBAL_MIRROR` | 运行时是否使用自带 mirrorlist (默认换成国内源；海外建议设置以恢复官方mirrorlist) |
 | `PACMAN_NEW_KEYRING` | 设置后每次启动都生成新本地密钥，需要启用不安全的源时设置 |
+| `IDA_MCP_URL` | IDA Pro MCP Streamable HTTP URL |
+| `GHIDRA_MCP_URL` | Ghidra MCP Streamable HTTP URL |
 
 ## 目录结构
 

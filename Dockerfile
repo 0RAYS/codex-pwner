@@ -11,5 +11,6 @@ RUN git clone https://github.com/matrix1001/glibc-all-in-one.git /root/glibc-all
 
 COPY configs/nginx.conf /etc/nginx/nginx.conf
 COPY configs/supervisord.conf /etc/supervisord.conf
+COPY configs/debian.urls /etc/debuginfod/
 COPY scripts/tmux.sh /tmux.sh
 RUN chmod +x /tmux.sh
