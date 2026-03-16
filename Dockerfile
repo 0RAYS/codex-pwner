@@ -14,4 +14,5 @@ COPY configs/supervisord.conf /etc/supervisord.conf
 COPY configs/debian.urls /etc/debuginfod/
 COPY scripts/tmux.sh /tmux.sh
 COPY scripts/init /init
+COPY configs/pwn.conf /root/.pwn.conf
 RUN chmod +x /tmux.sh /init
