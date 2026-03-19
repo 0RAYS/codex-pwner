@@ -1,0 +1,4 @@
+interface:
+  display_name: "GLIBC Heap Primitives"
+  short_description: "Solve heap CTFs by primitive and glibc era"
+  default_prompt: "Use $glibc-heap-primitives to map a GLIBC heap bug to likely how2heap families and a practical exploit chain."
