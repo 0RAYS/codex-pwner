@@ -15,4 +15,5 @@ COPY configs/debian.urls /etc/debuginfod/
 COPY scripts/tmux.sh /tmux.sh
 COPY scripts/init /init
 COPY configs/pwn.conf /root/.pwn.conf
+COPY skills/* /data/skills/
 RUN chmod +x /tmux.sh /init
