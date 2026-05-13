@@ -43,7 +43,7 @@ docker run -d \
 | `OPENAI_BASE_URL` | API 地址, 格式为https://placeholder.com/v1 |
 | `PASSWORD` | SSH 和终端的 root 密码 (默认为0raysnb) |
 | `PROXY` | HTTP/HTTPS 代理地址 (可选) |
-| `GLOBAL_MIRROR` | 运行时是否使用自带 mirrorlist (默认换成国内源；海外建议设置以恢复官方mirrorlist) |
+| `GLOBAL_MIRROR` | 是否使用自带海外 mirrorlist (默认禁用海外源；运行时可设置环境变量，构建时可设置同名 build arg，build arg 仅影响构建期) |
 | `PACMAN_NEW_KEYRING` | 设置后每次启动都生成新本地密钥，需要启用不安全的源时设置 |
 | `IDA_MCP_URL` | IDA Pro MCP Streamable HTTP URL |
 | `GHIDRA_MCP_URL` | Ghidra MCP Streamable HTTP URL |
@@ -73,6 +73,14 @@ FROM rocketdev/0rays-codex-pwner:latest
 
 RUN pacman -Syu --noconfirm python-angr
 ```
+
+构建本镜像时如需启用海外源：
+
+```bash
+docker build --build-arg GLOBAL_MIRROR=1 -t 0rays-codex-auditor .
+```
+
+构建结束后会恢复默认源配置，最终镜像运行时仍默认禁用海外源。
 
 为控制镜像体积，不要预装过大的工具，按需现场安装
 
