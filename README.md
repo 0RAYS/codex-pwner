@@ -26,10 +26,31 @@ docker run -d \
 |---|---|
 | Web 终端 (ttyd) | `http://<host>:8981` |
 | 文件浏览器 | `http://<host>:8981/files/` |
+| 自制 Web UI | `http://<host>:8981/ui/` |
 | 监控 ttyd (给codex用的，不要随意操作，避免影响ai判断) | `http://<host>:8981/monitor/` |
+| Omnigent Codex Web UI | `http://<host>:8981/codex-ui/` |
+| DeepSeek Harness Web UI | `http://<host>:8981/dsh/`（按需安装） |
 | SSH | `ssh root@<host> -p 8982` |
 
 默认密码通过 `PASSWORD` 环境变量设置，未设置时为 `0raysnb`。
+
+Omnigent 与终端共用此镜像内已经登录的 Codex CLI 和 `/data/codex`
+配置；它的会话数据库与上传附件保存在 `/data/omnigent`。该服务只监听
+容器回环地址 `127.0.0.1:6767`，通过现有 Nginx 的 `/codex-ui/`
+路径对外提供访问，不需要 Postgres 或额外容器。
+
+通过公网 HTTPS 反代访问 Omnigent 或 DeepSeek Harness 时，设置
+`PUBLIC_HOSTS` 为用户浏览器实际访问的裸 `host[:port]`，例如
+`codex.example.com`。
+
+## DeepSeek Harness（按需安装）
+
+镜像不预装 DeepSeek Harness，且不会自动启动它。如果需要，可以安装
+archlinuxcn 中的 `deepseek-harness` 包，然后使用 `supervisorctl start dsh`
+就可以使用了。
+
+由于 dsh web 启动时需要 token 才能访问，因此会自动跳转到 `/ui/dsh-launch`
+来帮你补上 token。
 
 ## 环境变量
 
@@ -47,6 +68,7 @@ docker run -d \
 | `PACMAN_NEW_KEYRING` | 设置后每次启动都生成新本地密钥，需要启用不安全的源时设置 |
 | `IDA_MCP_URL` | IDA Pro MCP Streamable HTTP URL |
 | `GHIDRA_MCP_URL` | Ghidra MCP Streamable HTTP URL |
+| `PUBLIC_HOSTS` | 两个 Web UI 共用的公网裸 host[:port] 白名单；例如 `codex.example.com`，多个值用逗号分隔 |
 
 ## 目录结构
 
@@ -55,6 +77,10 @@ docker run -d \
 ├── workspace/          # 主工作目录
 ├── tools/              # 预置安全工具
 ├── codex/              # Codex 配置持久化
+├── claude/             # Claude Code 用户配置、认证与本地状态（链接为 /root/.claude）
+├── claude.json         # Claude Code 全局用户配置（链接为 /root/.claude.json）
+├── omnigent/           # Omnigent SQLite 会话、附件和 host 状态
+├── dsh/                # 按需安装的 DeepSeek Harness 配置、会话和附件（链接为 /root/.dsh）
 ├── cc-switch/          # cc-switch 配置持久化
 └── custom.sh           # 用户自定义启动脚本（自动 source）
 ```
